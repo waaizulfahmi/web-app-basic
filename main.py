@@ -264,5 +264,7 @@ def logout():
     session.pop('level', None)
     return redirect(url_for('login'))
 
-#if __name__ == '__main__':
-    #app.run(debug=True)
+if __name__ == "__main__":
+        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        context.load_cert_chain('/etc/letsencrypt/live/gmooc4d.id/cert.pem', '/etc/letsencrypt/live/gmooc4d.id/privkey.pem')
+        app.run(host='0.0.0.0', port=5001, ssl_context=context)
