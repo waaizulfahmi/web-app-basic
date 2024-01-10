@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: lightskyblue;
+        }
+        .card {
+            margin-bottom: 10px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #d0cccc;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="80">
+                <b style="color: black;">Stroke Calculator</b>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}" style="color: black;">Home</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-brand ml-auto">
+                <img src="{{ url_for('static', filename='logo_amikom.png') }}" alt="Logo" height="75">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Stroke Calculator</h2>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <p class="text-center">Aplikasi Stroke Calculator adalah aplikasi yang berfungsi untuk menghitung resiko stroke yang mungkin dialami seseorang selama 10 tahun kedepan. Aplikasi website ini dibuat dengan mengidentifikasi resiko stroke berdasarkan faktor-faktor resiko stroke yang dimasukan oleh pengguna.</p>
+                    <p class="text-center">Aplikasi Stroke Calculator ini menghasilkan output berupa persentase nilai resiko stroke pada waktu 10 tahun kedepan. Persentase nilai resiko stroke yang ditampilkan pada aplikasi ini merupakan kalkulasi dari bobot masing-masing faktor resiko stroke yang dimasukan oleh pengguna.</p>
+                </div>
+                <div class="card">
+                    <div class="card-body text-start">
+                        <h5 class="text-center">Input Form</h5>
+                        <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+                            <div class="col-md-6">
+                                <form action="{{ url_for('result_stroke_calc') }}" method="POST">
+                                    <div class="mb-3">
+                                        <label for="usia" class="form-label">Usia :</label>
+                                        <input type="number" class="form-control" id="usia" name="usia" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jenis_kelamin" class="form-label" >Jenis Kelamin :</label><br>
+                                        <input type="radio" name="jenis_kelamin" value="5" required>Laki-laki
+                                        <input type="radio" name="jenis_kelamin" value="0" required>Perempuan<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jenjang_pendidikan" class="form-label">Jenjang Pendidikan :</label><br>
+                                        <select class="form-select" name="jenjang_pendidikan" required>
+                                            <option value="4">SD;SLTP/SMP;SLTA/SMA/SMK</option>
+                                            <option value="3">DIII;DIV/S1</option>
+                                            <option value="0">S1;S2</option>
+                                        </select><br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ginjal" class="form-label">Diagnosa Penyakit Ginjal :</label><br>
+                                        <input type="radio" name="ginjal" value="8" required>Ya
+                                        <input type="radio" name="ginjal" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="diabetes" class="form-label">Diagnosa Diabetes Melitus :</label><br>
+                                        <input type="radio" name="diabetes" value="7" required>Ya
+                                        <input type="radio" name="diabetes" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jantung" class="form-label">Diagnosa Gagal Jantung :</label><br>
+                                        <input type="radio" name="jantung" value="5" required>Ya
+                                        <input type="radio" name="jantung" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="arteri_perifer" class="form-label">Diagnosa Penyakit Arteri Perifer:</label><br>
+                                        <input type="radio" name="arteri_perifer" value="2" required>Ya
+                                        <input type="radio" name="arteri_perifer" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="darah_tinggi" class="form-label">Diagnosa Darah Tinggi :</label><br>
+                                        <input type="radio" name="darah_tinggi" value="2" required>Ya
+                                        <input type="radio" name="darah_tinggi" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="penyakit_jantung" class="form-label">Diagnosa Penyakit Jantung :</label><br>
+                                        <input type="radio" name="penyakit_jantung" value="1" required>Ya
+                                        <input type="radio" name="penyakit_jantung" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="status_merokok" class="form-label">Status Merokok :</label><br>
+                                        <input type="radio" name="status_merokok" value="8" required>Ya
+                                        <input type="radio" name="status_merokok" value="5" required>Kadang-kadang
+                                        <input type="radio" name="status_merokok" value="0" required>Tidak<br>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="aktivitas_fisik" class="form-label">Aktivitas Fisik (Pekerjaan) :</label><br>
+                                        <input type="radio" name="aktivitas_fisik" value="0" required>Ya
+                                        <input type="radio" name="aktivitas_fisik" value="1" required>Kadang-kadang
+                                        <input type="radio" name="aktivitas_fisik" value="2" required>Tidak<br>
+                                    </div>
+                                    <div class="mt-5">
+                                        <button type="submit" class="btn btn-primary">Calculation</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
